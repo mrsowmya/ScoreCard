@@ -106,5 +106,6 @@ class ScoreCard
 	
 end
 
+
 ScoreCard.new.generate_score_card
 
