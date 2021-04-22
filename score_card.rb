@@ -111,3 +111,4 @@ end
 
 ScoreCard.new('input.csv').generate_score_card
 
+
