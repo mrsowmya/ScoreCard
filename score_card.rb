@@ -7,7 +7,10 @@ class ScoreCard
 	GRADE_B = 'B'
 	GRADE_C = 'C'
 
-	def initialize
+	attr_accessor :input_file_path, :average, :data
+
+	def initialize(input_file_path)
+		@input_file_path = input_file_path
 		@average = {}
 		@data = generate_data
 	end
@@ -42,7 +45,7 @@ class ScoreCard
 	def generate_data
 		@data = []
 
-		CSV.read('input.csv').each do |row|
+		CSV.read(input_file_path).each do |row|
 			s1 = fetch_marks(row[1])
 			s2 = fetch_marks(row[2]) 
 			s3 = fetch_marks(row[3])
@@ -87,7 +90,7 @@ class ScoreCard
 				data = respective_grade_students(grade)
 				val = data.inject(0.0) { |sum, val| sum + val } / data.size
 
-				@average[grade] = { students: data.size, avg: val }
+				@average[grade] = { students: data.size, avg: val.to_i }
 			end
 		end
 	end
@@ -106,5 +109,5 @@ class ScoreCard
 	
 end
 
-ScoreCard.new.generate_score_card
+ScoreCard.new('input.csv').generate_score_card
 
